@@ -61,12 +61,7 @@ in the framework of Signal Detection Theory using GLMs  in R
 %%
 \begin{frame}{Resources}
 
-
-\textbf{R}
-\begin{itemize}
-\item Knoblauch \& Maloney (2012). Modeling Psychophysical Data in R
-\item any statistical textbook that uses R
-\end{itemize}
+\textbf{Knoblauch \& Maloney (2012). Modeling Psychophysical Data in R}\\
 \vspace{10pt}
 \textbf{Signal detection theory}
 \begin{itemize}
@@ -74,6 +69,11 @@ in the framework of Signal Detection Theory using GLMs  in R
 \item McNicol (2005). A premier of Signal Detection Theory
 \item Macmillian (2005). Detection Theory. A User's Guide
 \item Green \& Swets (1966). Signal Detection Theory and Psychophysics.
+\end{itemize}
+\vspace{10pt}
+\textbf{R}
+\begin{itemize}
+\item any statistical textbook that uses R
 \end{itemize}
 \vspace{10pt}
 \textbf{GLMs}
@@ -95,39 +95,12 @@ All slides and code are available in the following $git$ repository:\\[10pt]
 
 
 %%
-\section{Introduction}
-\subsection{Signal detection theory}
-\begin{frame}{Signal detection theory}
-
-\begin{center}
-\includegraphics[scale=0.9]{figs/normaldist.pdf}
-\end{center}
-
-\textbf{Assumptions:}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{itemize}
-\item Internal dimension representing some (sensory) evidence
-\item subjected to fluctuation (noise) 
-\item simple decision rule 
-\end{itemize}
-\end{column}
-\begin{column}{0.5\textwidth}
-\begin{itemize}
-\item  $X$
-\item $X$ is a random var.
-\item if $X > c$ then respond $YES/A$\\
-otherwise respond $NO/B$
-\end{itemize}
-\end{column}
-\end{columns}
-\end{frame}
-
+\section{Signal detection theory}
 %%
 \subsection{Yes/No detection experiment}
 \begin{frame}{Yes/No detection experiment}
 
-\textbf{On each trial, one stimulus are presented}. Thus, one draw is taken, either from one or the other distribution
+\textbf{On each trial, one stimulus is presented}
 
 \begin{center}
 \includegraphics[scale=0.7]{figs/yesno.pdf}
@@ -197,24 +170,23 @@ otherwise respond $NO/B$
 \end{frame}
 
 %%
-\begin{frame}[fragile]{Exercise 1a: Analyze a detection experiment}
+\begin{frame}[fragile]{Exercise 1: Analyze a detection experiment}
 
 \begin{tabular}{ll}
-Datafile: & data1.csv\\
+Datafile: & \textit{data1.csv}\\
 Description: & columns are: \\
 & Resp (response, 1: Yes, 0: No)\\
 & Stim (type of stimulus, 'S': signal-present, 'A': signal-absent).
 \end{tabular}
-
 \vspace{10pt}
-
 Steps:
 \begin{enumerate}
 \item Load \textit{data1.csv} as a dataframe in R using \begin{verbatim} read.csv()\end{verbatim}
 \item Examine its contents with \begin{verbatim} head() summary() \end{verbatim}
 \item Calculate Hit and False Alarm Rate ($pH$ and $pFA$)
 \end{enumerate}
-
+\vspace{10pt}
+\textit{Hints: slicing the data in R can be done with square brackets ([ ]) and selecting a column is done with the dollar sign (\$)}
 \pause
 \begin{center}
 $pH = 0.936$\\
@@ -225,6 +197,24 @@ $pFA = 0.288 $
 
 
 %%
+\begin{frame}{Signal detection theory}
+
+\begin{center}
+\includegraphics<1>[scale=0.9]{figs/normaldist1.pdf}
+\includegraphics<2>[scale=0.9]{figs/normaldist2.pdf}
+\end{center}
+
+\textbf{Assumptions:}
+\begin{itemize}
+\item Internal dimension representing some (sensory) evidence, $X$
+\item subjected to fluctuation (noise), $X$ is a random var.
+\item simple decision rule: if $X > c$ then respond $YES$\\
+otherwise respond $NO$
+\end{itemize}
+
+\end{frame}
+
+
 \subsection{Equal-variance, Gaussian SDT}
 \begin{frame}{SDT with some added assumptions}
 
@@ -295,6 +285,12 @@ d'= \Phi^{-1}(pH) - \Phi^{-1}(pFA)
 \end{frame}
 
 
+%% 
+\begin{frame}{Exercise 2: explore the normal distribution}
+
+\end{frame}
+
+
 %%
 \begin{frame}{}
 $\Phi()$ is the cumulative normal dist. function\\
@@ -307,11 +303,19 @@ and $\Phi^{-1}()$ its inverse, or \textit{quantile} function
 \end{frame}
 
 %%
-\begin{frame}[fragile]{Exercise 1b: Analyze a detection experiment}
+\begin{frame}[fragile]{Exercise 3: Analyze a detection experiment}
 \begin{enumerate}
-\item Use Eqs. (1) and (2) to calculate $d'$ and $c$. \\
-Hint: check functions \textit{qnorm()} and \textit{pnorm()}
+\item Use the Eqs. to calculate $d'$ and $c$.
 \end{enumerate}
+
+\begin{block}{}
+\begin{equation*}
+c = -\Phi^{-1}(pFA)
+\end{equation*}
+\begin{equation*}
+d'= \Phi^{-1}(pH) - \Phi^{-1}(pFA)
+\end{equation*}
+\end{block}
 
 \pause
 \begin{verbatim}
@@ -329,7 +333,7 @@ $\hat{c} = 0.559237$
 \end{frame}
 
 %%
-\begin{frame}[fragile]{Exercise 1b: Analyze a detection experiment}
+\begin{frame}[fragile]{Exercise 3': Analyze a detection experiment}
 Some textbooks use the calculation of a modified criterion $c_{center} = C$ that is midway between the two distributions
 
 \begin{align*}
@@ -353,23 +357,22 @@ C = c_{center} & = -\Phi^{-1}(pH) + d'/2 = -\Phi^{-1}(pFA) - d'/2 \\
 %%
 \section{Generalized Linear Models}
 \begin{frame}{Generalized Linear Models (GLMs)}
-Another approach to estimate $\hat{d'}$ and $\hat{c}$ is using GLMs.
+Another approach to estimate $\hat{d'}$ and $\hat{c}$ is using GLMs.\\[5pt]
 
-A GLM is a linear model generalized for response variables that are not necesarily continuous. 
+A GLM is a linear model generalized for response variables that are not necessarily continuous. 
 
 Let's consider a linear model
 \begin{center}
 $y = \beta_1 \cdot x + \beta_0$
 \end{center}
 
-GLMs made linear models \textbf{general} by having the variable $y$ replaced by a probability value (the expectation of Y, $E[Y]$). \\
-Because $E[Y]$ ranges from 0 to 1, it needs a function $g()$ that 'links' the linear predictors (right-hand side) with the response variable.
+GLMs made linear models \textbf{general} by having $y$ replaced by a probability value (the expectation of Y, $E[Y]$), and adding a function $g()$ that 'links' the linear predictors (right-hand side) with the probability in the response variable.
 
 \begin{center}
 $g(E[y])= \beta_1 \cdot x + \beta_0$
 \end{center}
 
-There could be many coefficients ($\beta_0, \beta_1, \beta_2 \dots$), therefore GLMs are usually annotated in a vector form 
+There could be  explanatory variables ($\beta_0, \beta_1, \beta_2 \dots$), therefore GLMs are  annotated in a vector form 
 
 $$
 g(E[\mathbf{Y}]) = \mathbf{X} \cdot \mathbf{\beta}
@@ -381,7 +384,7 @@ $$
 
 %%
 \begin{frame}{Link function $g()$}
-For this case an appropriate choice of the link function is the quantile normal function $g() = \Phi^{-1}()$tus
+For this case an appropriate choice of the link function is the quantile normal function $g() = \Phi^{-1}()$
 
 \begin{center}
 \includegraphics[scale=0.5]{figs/linkfun.pdf}
@@ -392,24 +395,6 @@ For this case an appropriate choice of the link function is the quantile normal 
 
 %%
 \subsection{GLMs and SDT}
-\begin{frame}{GLM and SDT}
-Let's consider our detection experiment:
-\begin{align*}
-    \mathbf{Y}  &= 
-    \begin{bmatrix}
-           0 \\
-           1 \\
-           0 \\
-           \vdots \\
-           1 \\
-           1 \\
-           1 \\
-    \end{bmatrix}
-\end{align*}
-
-The first set of responses correspond to signal-absent trials, and the second set to signal-present trials. 
-\end{frame}
-
 %
 \begin{frame}{GLM and SDT}
 Note that the False Alarm and Hit Rates are probabilities
@@ -427,10 +412,9 @@ $$g(P[Y=1]) = \beta_1 \cdot X + \beta_0 $$
 \end{frame}
 
 
-%
+%%
 \begin{frame}{GLM and SDT}
-
-Then the GLM for a detection experiment can be arranged
+Let's consider our detection experiment. The GLM for a detection experiment can be arranged
 \begin{align*}
 g(E[\mathbf{Y}]) &= \mathbf{X} \cdot \mathbf{\beta}\\
     g( 
@@ -458,22 +442,24 @@ g(E[\mathbf{Y}]) &= \mathbf{X} \cdot \mathbf{\beta}\\
     \end{bmatrix}
 \end{align*}
 
+The first set of responses correspond to signal-absent trials, and the second set to signal-present trials. \\
 This GLM can be then solved using maximum likelihood estimation (MLE).\\
-The procedure returns estimates for $\beta_0$ and $\beta_1$.\\
+The procedure returns estimates for $\beta_0$ and $\beta_1$.
 
 
 \end{frame}
 
 
 %%
-\begin{frame}[fragile]{Exercise 1c: Analyze a detection experiment using a GLM}
+\begin{frame}[fragile]{Exercise 4: Analyze a detection experiment using a GLM}
 \begin{enumerate}
 \item Use the \textit{GLM method} to analyse the detection experiment data\\
 \end{enumerate}
 
 \pause
 \begin{verbatim}
-> fit <- glm(Resp ~ Stim, data=df, link=binomial('probit'))
+> fit <- glm(Resp ~ Stim, data=df, 
+                     family=binomial('probit'))
 \end{verbatim}
 \end{frame}
 
@@ -560,11 +546,11 @@ StimS        1.8773729  2.2917211
 
 \subsection{Conditions and model comparison with GLMs}
 %%
-\begin{frame}[fragile]{Exercise 2: Detection exp. in two conditions}
+\begin{frame}[fragile]{Exercise 5: Detection exp. in two conditions}
 
-To include different conditions is straightforward in the GLM framework \\[10pt]
+To include different conditions in the GLM framework \\[10pt]
 
-\textbf{Reading data of two conditions}
+\textbf{Reading data from two exp. conditions}
 \begin{verbatim}
 > df1 <- read.csv("data1.csv")
 > df1$Cond <- "A"
@@ -577,7 +563,7 @@ To include different conditions is straightforward in the GLM framework \\[10pt]
 \end{frame}
 
 %%
-\begin{frame}[fragile]{Exercise 2: Detection exp. in two conditions}
+\begin{frame}[fragile]{Exercise 5: Detection exp. in two conditions}
 \textbf{Fitting different models}\\[10pt]
 \textit{(a) Unique model}
 \begin{verbatim}
@@ -601,7 +587,7 @@ To include different conditions is straightforward in the GLM framework \\[10pt]
 
 
 %%
-\begin{frame}[fragile]{Exercise 2: Detection exp. in two conditions}
+\begin{frame}[fragile]{Exercise 5: Detection exp. in two conditions}
 \textit{Model selection}
 
 \begin{verbatim}
@@ -625,7 +611,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 \end{frame}
 
 %%
-\begin{frame}[fragile]{Exercise 2: Detection experiment on two conditions}
+\begin{frame}[fragile]{Exercise 5: Detection experiment on two conditions}
 \textit{Parameter extraction}
 \begin{verbatim}
 > coef(fit2)
@@ -872,7 +858,7 @@ However, this relationship has been called into question recently (Yeshurun, Car
 
 
 %%
-\begin{frame}[fragile]{Exercise 3: Discrimination experiment: 2-AFC}
+\begin{frame}[fragile]{Exercise 6: Discrimination experiment: 2-AFC}
 
 Analyze the data from a 2-AFC discrimination experiment using a GLM
 
@@ -910,9 +896,16 @@ Solution: $d' = 1.53$, $c=0.77$, $c_{center} = 0.01$
 Application of GLMs to scaling methods: MLDS
 
 
+\end{frame}
+
+
+%%
+\section{Further Exercises}
+\begin{frame}{Further Exercises}
 
 
 \end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -922,7 +915,7 @@ Application of GLMs to scaling methods: MLDS
 \end{center}
 \end{frame}
 
-
+\section{Appendix: some mathematical derivations}
 \begin{frame}{*1: Derivation 1}
 \begin{center}
 Given $pFA = 1 - \Phi(c)$ and $pH = 1 - \Phi(c - d')$
@@ -990,7 +983,7 @@ g(E[Y=1| X=0, C=B]) & = 1* \beta_0 + 0 * \beta_1 + 1* \beta_2 \\
 g(E[Y=1| X=1, C=B]) & = 1* \beta_0 + 1 * \beta_1 + 1* \beta_2 \\
 \end{align*}
 
-by replacing expectations for FA and Hit Rates, and by replacing the link function for the quantile function ($g() = \Phi^{-1}$), we have
+by replacing expectations for FA and Hit Rates, and by replacing the link function for the quantile function $g() = \Phi^{-1}()$, we have
 
 \begin{align}
 \Phi^{-1}(pFA_{A}) & = \beta_0 \label{eq:1}\\
@@ -1051,7 +1044,7 @@ g(E[Y=1| X=0, C=B]) & = 1* \beta_0 + 0 * \beta_1 + 1* \beta_2 +  0* \beta_3 \\
 g(E[Y=1| X=1, C=B]) & = 1* \beta_0 + 1 * \beta_1 + 1* \beta_2 +  1* \beta_3 \\
 \end{align*}
 
-by replacing expectations for FA and Hit Rates, and by replacing the link function for the quantile function ($g() = \Phi^{-1}$), we have
+by replacing expectations for FA and Hit Rates, and by replacing the link function for the quantile function $g() = \Phi^{-1}()$, we have
 
 \begin{align}
 \Phi^{-1}(pFA_{A}) & = \beta_0 \label{eq:c1}\\
