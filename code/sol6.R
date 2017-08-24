@@ -1,7 +1,7 @@
 ## Signal Detection Theory tutorial in R
-## Exercise 3 solution
+## Exercise 6 solution - 2AFC
 
-#setwd("~/git/sdt_tutorial_ecvp17/dist")
+setwd("~/git/sdt_tutorial_ecvp17/dist")
 
 ## 1. Reading data
 df <- read.csv("data2afc.csv")

@@ -1,7 +1,7 @@
 ## Signal Detection Theory tutorial in R
-## Exercise 1 solution
+## Exercise 1, 3, 4 solution
 
-#setwd("~/git/sdt_tutorial_ecvp17/dist")
+setwd("~/git/sdt_tutorial_ecvp17/dist")
 
 
 ######  Part 1a
@@ -56,5 +56,5 @@ pH_2 <- 1 - pnorm(c_2 - dp_2)
 confint(fit)
 
 
-# EOF
+
 
