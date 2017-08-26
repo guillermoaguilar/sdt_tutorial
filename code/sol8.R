@@ -36,14 +36,6 @@ dp_a <- coef(fit3)[[2]]
 c_b <- -(coef(fit3)[[1]] + coef(fit3)[[3]])
 dp_b <- coef(fit3)[[2]] + coef(fit3)[[4]]
 
-ci <- confint(fit3)
-
-c_a_ci <- -ci[1,]
-c_b_ci <- -(ci[1,] + ci[3,])
-
-dp_a_ci <- ci[2,]
-dp_b_ci <- ci[2,] + ci[4,]
-
 
 
 # EOF

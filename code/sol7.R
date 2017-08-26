@@ -51,17 +51,6 @@ dp_c <- coef(fit3)[[2]]+coef(fit3)[[7]]
 dp_d <- coef(fit3)[[2]]+coef(fit3)[[8]]
 
 
-## Confidence intervals
-ci <- confint(fit3)
-
-c_a_ci <- -ci[1,]
-c_b_ci <- -(ci[1,] + ci[3,])
-# .. and so on
-
-dp_a_ci <- ci[2,]
-dp_b_ci <- ci[2,] + ci[6,]
-dp_c_ci <- ci[2,] + ci[7,]
-dp_d_ci <- ci[2,] + ci[8,]
 
 
 # EOF

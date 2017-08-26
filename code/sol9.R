@@ -27,11 +27,6 @@ dp_a <- coef(fit3)[[2]] / sqrt(2)
 dp_b <- (coef(fit3)[[2]] + coef(fit3)[[4]])/ sqrt(2)
 
 
-ci <- confint(fit3)
-
-dp_a_ci <- ci[2,]/ sqrt(2)
-
-dp_b_ci <- (ci[2,] + ci[4,])/ sqrt(2)
 
 # EOF
 
