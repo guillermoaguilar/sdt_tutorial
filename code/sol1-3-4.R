@@ -1,10 +1,10 @@
 ## Signal Detection Theory tutorial in R
 ## Exercise 1, 3, 4 solution
 
-setwd("~/git/sdt_tutorial_ecvp17/dist")
+#setwd("~/git/sdt_tutorial/code")
 
 
-######  Part 1a
+######  Ex. 1
 ## 1. Reading data
 df <- read.csv("data1.csv")
 
@@ -30,14 +30,14 @@ res <- matrix(c(H, M, FA, CR), nc=2, dimnames = list(c('Yes', 'No'), c('S', 'N')
 as.table(res)
 
 
-######  Part 1b
+######  Ex. 3
 dp_1 <- qnorm(pH_1) - qnorm(pFA_1)
 c_1 <- -qnorm(pFA_1)
 
 ## c_center = C
 c_center <- -(qnorm(pH_1)+qnorm(pFA_1))/2
 
-######  Part 1c. fitting procedure using GLM
+######  Ex. 4.  fitting procedure using GLM
 fit <- glm(Resp ~ Stim, family=binomial('probit'), data=df)
 # m <- model.matrix(~Stim) # this command can be used to explore the design matrix X
 

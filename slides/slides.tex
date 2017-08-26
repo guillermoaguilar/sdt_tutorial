@@ -42,7 +42,7 @@
 {Technische Universit\"at Berlin}
 
 \date[ECVP 2017]{August 27th, 2017}
-
+\titlegraphic{\hfill \includegraphics[scale=0.3]{figs/TUlogo.pdf}}
 \subject{Signal Detection Theory}
 
 \begin{document}
@@ -69,19 +69,25 @@ in the framework of Signal Detection Theory using GLMs  in R
 
 \textbf{Knoblauch \& Maloney (2012). Modeling Psychophysical Data in R}\\
 \vspace{10pt}
+\textbf{Psychophysics}
+\begin{itemize}
+\item Kingdom \& Prins (2010). Psychophysics: A practical introduction.
+\item Gescheider (1997). Psychophysics: The Fundamentals
+\end{itemize}
+
 \textbf{Signal detection theory}
 \begin{itemize}
 \item Wickens (2002). Elementary Signal Detection Theory.
 \item McNicol (2005). A premier of Signal Detection Theory
-\item Macmillian and Creelman (2005). Detection Theory. A User's Guide
-\item Green and Swets (1966). Signal Detection Theory and Psychophysics.
+\item Macmillian \& Creelman (2005). Detection Theory. A User's Guide
+\item Green \& Swets (1966). Signal Detection Theory and Psychophysics.
 \end{itemize}
-\vspace{10pt}
+
 \textbf{R}
 \begin{itemize}
-\item any statistical textbook that uses R
+\item Field \& Miles (2012). Discovering Statistics using R.
+\item any textbook on statistics that uses R
 \end{itemize}
-\vspace{10pt}
 \textbf{GLMs}
 \begin{itemize}
 \item Wood (2006). Generalized Additive Models. An Introduction in R.
@@ -396,17 +402,6 @@ $$
 
 
 %%
-\begin{frame}{Link function $g()$}
-For this case an appropriate choice of the link function is the quantile normal function $g() = \Phi^{-1}()$
-
-\begin{center}
-\includegraphics[scale=0.5]{figs/linkfun.pdf}
-\end{center}
-
-\end{frame}
-
-
-%%
 \subsection{GLMs and SDT}
 %
 \begin{frame}{GLM and SDT}
@@ -462,6 +457,16 @@ The procedure returns estimates for $\beta_0$ and $\beta_1$.
 
 \end{frame}
 
+
+%%
+\begin{frame}{Link function $g()$}
+For this case an appropriate choice of the link function is the quantile normal function $g() = \Phi^{-1}()$
+
+\begin{center}
+\includegraphics[scale=0.5]{figs/linkfun.pdf}
+\end{center}
+
+\end{frame}
 
 %%
 \begin{frame}[fragile]{Exercise 4: Analyze a detection experiment using a GLM}
@@ -785,7 +790,7 @@ Remember from earlier that $\beta_0 = -c$ and $\beta_1 = d'$\\[5pt]
 \item The intercept applies for the first condition ($A$), thus
 $\beta_0 = -c_A$.
 \item $\beta_1 = d'$, assumed equal for both conditions A and B.
-\item The new parameter $\beta_2$ is the difference with respecto to $\beta_0$. Thus, $c_B = - (\beta_0 + \beta_2)$.
+\item The new parameter $\beta_2$ is the difference with respect to $\beta_0$. Thus, $c_B = - (\beta_0 + \beta_2)$.
 \end{itemize}
 
 Thus,
@@ -863,7 +868,7 @@ d'_{AFC} =  d'_{YesNo} \sqrt{2}
 $$ 
 
 (see derivation in Wickens 2002,  or in McNicol 1972 )\\
-\vspace{10pt}
+\vspace{30pt}
 
 However, this relationship has been called into question recently (Yeshurun, Carrasco \& Maloney, 2008)
 \end{frame}
@@ -877,7 +882,7 @@ However, this relationship has been called into question recently (Yeshurun, Car
 Analyze the data from a 2-AFC discrimination experiment using a GLM
 
 \begin{tabular}{ll}
-Datafile: & \textit{data2afc.csv}\\
+Datafile: & \textit{datatwoafc.csv}\\
 Description: & columns are: \\
 & Resp (response, 1: 1st interval, 0: 2nd interval)\\
 & Stim (type of stimulus, 'SN': stimulus in 1st interval, \\
@@ -904,6 +909,31 @@ Solution: $d' = 1.53$, $c=0.77$, $c_{center} = 0.01$
 
 
 %%
+\section{Further Exercises}
+\begin{frame}{Further Exercises}
+
+\begin{itemize}
+
+\item \textbf{Exercise 7}: Add to the analysis in Exercise 5 (Yes/No experiment) two other conditions: \textit{data3.csv} and \textit{data4.csv}. \\
+Does d' change across all four conditions?  Calculate confidence intervals for each parameter.
+
+\vspace{20pt}
+\item \textbf{Exercise 8}: Analyse another Yes/No experiment in two conditions: \textit{data\_small\_1.csv} and \textit{data\_small\_2.csv}. This time the experiment was done with a small number of trials.\\
+Does d' change between these two conditions? Calculate confidence intervals for each parameter.
+
+
+\vspace{20pt}
+\item \textbf{Exercise 9}: Analyze the data of a 2-AFC experiment in two conditions: \textit{datatwoafc-2.csv} and \textit{datatwoafc-3.csv}\\
+Test a model for a change in sensitivity between these two conditions.
+
+
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{MLDS}
 \begin{frame}{Maximum Likelihood Difference Scaling}
 Scaling method aimed to find $\Psi(x)$
@@ -980,14 +1010,14 @@ g(E[Y]) & = \boldsymbol{1} \cdot \beta_2 - \boldsymbol{2} \cdot \beta_5 + \bolds
 
 
 %%
-\begin{frame}[fragile]{Exercise 7: Estimate a perceptual scale using MLDS}
+\begin{frame}[fragile]{Exercise 10: Estimate a perceptual scale using MLDS}
 
 Analyze the data from a MLDS scaling experiment
 
 \begin{tabular}{ll}
 Datafile: & \textit{datamlds.csv}\\
 Description: & columns are: \\
-& Resp (response, 1: 2nd pair (x2, x3), 0: 1st pair (x1, x2)\\
+& Resp (response, 0: 1st pair (x1, x2), 1: 2nd pair (x2, x3) \\
 & s1, s2, s3: Stimulus values on each triad\\
 \end{tabular}
 
@@ -1000,28 +1030,7 @@ Steps:
 \item Calculate the perceptual scale using the function $mlds()$, from package $MLDS$ (package needs to be installed).
 \end{enumerate}
 
-\pause
-\begin{center}
-Solution
-\end{center}
 \end{frame}
-
-
-%%
-\section{Further Exercises}
-\begin{frame}{Further Exercises}
-
-\begin{enumerate}
-\item To the analysis of a Yes/No experiment in Exercise 5, add other two conditions that were also measured: \textit{data3.csv} and \textit{data4.csv}. \\
-Does d' changes across conditions?
-
-\item Analyze the data of a 2-AFC experiment in other condition: \text{dataafc-2.csv}.\\
-Test a model for a change in sensitivity
-
-\end{enumerate}
-
-\end{frame}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
